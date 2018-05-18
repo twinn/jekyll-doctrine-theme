@@ -1,0 +1,11 @@
+<nav id="navigation">
+    <a id="menu-open">
+        &#9776
+    </a>
+    {% for page in breadcrumbs %}
+        <a class="breadcrumb-item" href="{{ page.url }}">
+            <div class="nav-icon">{{page.icon}}</div>
+            <span>{{page.title}}</span>
+        </a>
+    {% endfor %}
+</nav>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    {% if site.open_nav %}
+      {% assign body_class = "menu-open" %}
+    {% else %}
+      {% assign body_class = "" %}
+    {% endif %}
+
+    {% if page.icon %}
+      {% assign icon = page.icon %}
+    {% else %}
+      {% assign icon = "📄" %}
+    {% endif %}
+    {% if page.title %}
+      {% assign title = page.title %}
+    {% else %}
+      {% assign title = page.name | capitalize %}
+    {% endif %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{page.title}}</title>
+        <link rel="stylesheet" href="{{- 'assets/css/main.css' | relative_url -}}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+        <link rel="icon" type="text/plain" href="data:,{{icon}}" sizes="any"/>
+        <script src="/assets/js/emoji-favicon-toolkit.js"></script>
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    </head>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <body class={{ body_class }}>
+        <div class="menu">
+            <a id="menu-close">
+                &#10005
+            </a>
+            <section>
+                {% assign item = left_nav %}
+                {%- include nav_item.html -%}
+            </section>
+        </div>
+        <div class="content">
+            {%- include nav.html -%}
+            <div id="header">
+                <div id="cover", style="background-image: url('{{page.cover}}')"></div>
+            </div>
+            <section class="markdown-body">
+                <div class="header-icon">{{ icon }}</div>
+                <h1>{{title}}</h1>
+                {{ content }}
+            </section>
+            <footer>
+                <span>🛠 Built using <a href="https://doctrine.md">doctrine.md</a></span>
+            </footer>
+        </div>
+
+        <script>
+         let toggleMenu = function() {
+             document.body.classList.toggle("menu-open")
+         }
+         document.getElementById("menu-open").addEventListener("click", toggleMenu)
+         document.getElementById("menu-close").addEventListener("click", toggleMenu)
+        </script>
+    </body>
+</html>

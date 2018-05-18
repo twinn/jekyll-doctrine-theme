@@ -1,0 +1,10 @@
+<details {{item.open?}}>
+    <summary><a href={{item.item.url}}>{{item.item.icon}} {{item.item.title}}</a></summary>
+    {% if item.empty? %}
+      <span>No Pages Inside</span>
+    {% endif %}
+    {% for sub_child in item.children %}
+        {% assign item = sub_child %}
+        {% include nav_item.html %}
+    {% endfor %}
+</details>
